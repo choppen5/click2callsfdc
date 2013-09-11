@@ -1,0 +1,20 @@
+        <script src="https://na15.salesforce.com/support/api/27.0/interaction.js"></script>
+        <script src="https://na15.salesforce.com/support/console/27.0/integration.js"></script>
+
+
+
+
+      sforce.interaction.cti.enableClickToDial();
+	  sforce.interaction.cti.onClickToDial(startCall); 
+
+	  function startCall(response) {
+            var result = JSON.parse(response.result);  
+            var cleanednumber = cleanFormatting(result.number);
+            params = {"PhoneNumber": cleanednumber};
+            Twilio.Device.connect(params);
+        }
+
+      function cleanFormatting(number) { 
+            //changes a SFDC formatted US number, which would be 415-555-1212       
+            return number.replace(' ','').replace('-','').replace('(','').replace(')','').replace('+','');
+        }

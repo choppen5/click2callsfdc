@@ -1,18 +1,22 @@
 require 'rubygems'
 require 'sinatra'
 require 'twilio-ruby'
+
+disable :protection
  
 get '/' do
-    # Find these values at twilio.com/user/account
+    # Twilio acount credentials
     account_sid = ENV['twilio_account_sid']
     auth_token = ENV['twilio_account_token']
-    # This application sid will play a Welcome Message.
-    demo_app_sid = 'AP2b14f34d92cefb0bcce2297a1b34d215'
+    demo_app_sid = ENV['twilio_app_sid'] 
+
+    # Generate capability token
     capability = Twilio::Util::Capability.new account_sid, auth_token
     capability.allow_client_outgoing demo_app_sid
     capability.allow_client_incoming "default_client"
     token = capability.generate
-    puts "token = #{token}"
+
+    # Render html
     erb :index, :locals => {:token => token}
 end
 
