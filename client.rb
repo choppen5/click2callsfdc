@@ -8,7 +8,7 @@ get '/' do
     # Twilio acount credentials
     account_sid = ENV['twilio_account_sid']
     auth_token = ENV['twilio_account_token']
-    demo_app_sid = ENV['twilio_app_sid'] 
+    demo_app_sid = ENV['twilio_app_Quickstart'] 
 
     # Generate capability token
     capability = Twilio::Util::Capability.new account_sid, auth_token
