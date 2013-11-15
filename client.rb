@@ -28,8 +28,24 @@ post '/dial' do
             d.Number number
         end
 
+
+
     end
     puts response.text #for debugging
     response.text
 end
 
+post '/voice' do
+
+    #dial a client
+
+    response = Twilio::TwiML::Response.new do |r|
+        r.Dial do |d|
+            d.Client "default_client"
+        end
+
+    end
+    puts response.text #for debugging
+    response.text
+
+end 
